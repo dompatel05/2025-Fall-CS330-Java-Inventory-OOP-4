@@ -2,12 +2,6 @@ package edu.odu.cs.cs330.items;
 
 import java.util.Objects;
 
-/**
- * This class represents one piece of armour--as found in most video games.
- * This includes boots and helmets.
- *
- * Armour may not be stacked.
- */
 @SuppressWarnings({
     "PMD.BeanMembersShouldSerialize",
     "PMD.CloneMethodReturnTypeMustMatchClassName",
@@ -20,9 +14,6 @@ import java.util.Objects;
 })
 public class Armour extends Equippable implements Item
 {
-    /**
-     * Format used to generate a printable representation.
-     */
     public static final String FMT_STR = String.join(
         "",
         "  Nme: %s%n",
@@ -33,60 +24,40 @@ public class Armour extends Equippable implements Item
         "  Emt: %s%n"
     );
 
-    /**
-     * The amount of damage that can be negated.
-     */
     protected int defense;
 
-    /**
-     * Default to a armour with a defense of zero.
-     */
     public Armour()
     {
         super();
-
         this.defense = 0;
     }
 
-    /**
-     * Retrieve armour defense.
-     *
-     * @return total defense provided
-     */
     public int getDefense()
     {
         return this.defense;
     }
 
-    /**
-     * Update defense.
-     *
-     * @param def replacement getDefense()
-     */
     public void setDefense(int def)
     {
         this.defense = def;
     }
 
-    /**
-     * Clone--i.e., copy--this Armour.
-     */
     @Override
     public Item clone()
     {
         Armour cpy = new Armour();
-
-        // Refer to the previous assignment
+        
+        cpy.setName(this.getName());
+        cpy.setMaterial(this.getMaterial());
+        cpy.setDurability(this.getDurability());
+        cpy.setDefense(this.getDefense());
+        cpy.setModifier(this.getModifier());
+        cpy.setModifierLevel(this.getModifierLevel());
+        cpy.setElement(this.getElement());
 
         return cpy;
     }
 
-    /**
-     * Check for logical equivalence--based on name, material, modifier,
-     * modifierLevel, element, and defense.
-     *
-     * @param rhs object for which a comparison is desired
-     */
     @Override
     public boolean equals(Object rhs)
     {
@@ -104,10 +75,6 @@ public class Armour extends Equippable implements Item
             && this.getDefense() == rhsItem.getDefense();
     }
 
-    /**
-     * Compute hashCode based on name, material, modifier, modifierLevel,
-     * element, and defense.
-     */
     @Override
     public int hashCode()
     {
@@ -121,16 +88,17 @@ public class Armour extends Equippable implements Item
         );
     }
 
-    /**
-     * *Print* one Armour.
-     */
     @Override
     public String toString()
     {
-        return "  Refer to the previous assignment...";
+        return String.format(FMT_STR,
+            this.getName(),
+            this.getDurability(),
+            this.getDefense(),
+            this.getMaterial(),
+            this.getModifier(),
+            this.getModifierLevel(),
+            this.getElement()
+        );
     }
 }
-
-
-
-
